@@ -23,9 +23,7 @@ export const getWard = async (req: Request, res: Response) => {
         SELECT * FROM polygons ps WHERE [Type] = 3 AND @p.STIntersects(ps.BoundingBox) = 1 AND @p.STIntersects(ps.Polygon) = 1;`);
 
     const ward: Ward | undefined = result.recordset.map((row) => ({
-      Name: row.Name,
-      Easting: easting,
-      Northing: northing
+      Name: row.Name
     }))[0];
 
     if (ward) {
