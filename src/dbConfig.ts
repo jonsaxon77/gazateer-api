@@ -21,5 +21,4 @@ const poolPromise: Promise<sql.ConnectionPool> = new sql.ConnectionPool(config)
     // For example, you could throw a custom error:
     throw new Error("Database connection failed");
   });
-
 export { sql, poolPromise };
