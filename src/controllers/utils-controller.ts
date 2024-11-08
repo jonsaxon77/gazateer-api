@@ -15,7 +15,6 @@ export const getWard = async (req: Request, res: Response) => {
   try {
     const pool = await poolPromise;
 
-    /*
     const result = await pool
       .request()
       .input("easting", sql.Float, easting)
@@ -23,8 +22,8 @@ export const getWard = async (req: Request, res: Response) => {
         DECLARE @p geometry;
         SET @p = geometry::Point(@easting, @northing, 0);
         SELECT * FROM polygons ps WHERE [Type] = 3 AND @p.STIntersects(ps.BoundingBox) = 1 AND @p.STIntersects(ps.Polygon) = 1;`);
-    */
 
+    /*
     const result = await pool
       .request()
       .input("easting", sql.Float, easting)
@@ -36,6 +35,7 @@ export const getWard = async (req: Request, res: Response) => {
 						  + N')', 4152);
         SELECT top 1 NSGREF, address1, address2, shape, @Point.STDistance(shape) as distance from symstreets WHERE shape.STIsValid() = 1 
         ORDER BY @Point.STDistance(shape) asc`);
+    */
 
     const ward: Ward | undefined = result.recordset.map((row) => ({
       address1: row.address1,
