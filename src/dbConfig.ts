@@ -1,10 +1,10 @@
 import sql from "mssql";
 
 const config: sql.config = {
-  user: process.env.DBRPAUSER,
-  password: process.env.DBRPAPASSWORD,
+  user: process.env.RPAUSER,
+  password: process.env.RPAPASSWORD,
   server: "corpsqlserveruat.database.windows.net",
-  database: process.env.DATABASERPA,
+  database: process.env.RPADATABASE,
   options: {
     encrypt: true,
   },
@@ -17,8 +17,6 @@ const poolPromise: Promise<sql.ConnectionPool> = new sql.ConnectionPool(config)
   })
   .catch((err) => {
     console.log("Database Connection Failed! Bad Config:", err);
-    // Either re-throw the error or handle it appropriately here.
-    // For example, you could throw a custom error:
     throw new Error("Database connection failed");
   });
 export { sql, poolPromise };
