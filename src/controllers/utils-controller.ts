@@ -12,9 +12,6 @@ export const getWard = async (req: Request, res: Response) => {
   const wgs84 = "+proj=longlat +datum=WGS84 +no_defs ";
   const [easting, northing] = proj4(wgs84, osgb, [lng, lat]);
 
-  console.log(easting);
-  console.log(northing);
-
   try {
     const pool = await poolPromise;
 
@@ -28,7 +25,6 @@ export const getWard = async (req: Request, res: Response) => {
         SELECT * FROM polygons ps WHERE [Type] = 3 AND @p.STIntersects(ps.BoundingBox) = 1 AND @p.STIntersects(ps.Polygon) = 1;`);
     */
 
-    
     const result = await pool
       .request()
       .input("easting", sql.Float, easting)
@@ -38,8 +34,8 @@ export const getWard = async (req: Request, res: Response) => {
 						  + N' '
 						  + CAST(@Northing as NVARCHAR(MAX))
 						  + N')', 4152);
-        SELECT top 1 NSGREF, address1, address2, shape, @Point.STDistance(shape) as distance from symstreets WHERE shape.STIsValid() = 1 
-        ORDER BY @Point.STDistance(shape) asc`);
+        SELECT top 1 NSGREF, address1, address2, shape, @Point.STDistance(shape.MakeValid()) as distance from symstreets WHERE shape.STIsValid() = 1 
+        ORDER BY @Point.STDistance(shape.MakeValid()) asc`);
     
         console.log(result);
 
