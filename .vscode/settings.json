@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/7d565543-9bc3-46a0-b601-37b7c56ff304/resourceGroups/gazateer-sthelens_group/providers/Microsoft.Web/sites/gazateer-sthelens",
+    "appService.deploySubpath": "dist"
+}

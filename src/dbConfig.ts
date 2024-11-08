@@ -1,10 +1,10 @@
 import sql from "mssql";
 
 const config: sql.config = {
-  user: process.env.DBUSER,
-  password: process.env.DBPASSWORD,
-  server: "corpsqlserverprod.database.windows.net",
-  database: process.env.DATABASE,
+  user: process.env.DBRPAUSER,
+  password: process.env.DBRPAPASSWORD,
+  server: "corpsqlserveruat.database.windows.net",
+  database: process.env.DATABASERPA,
   options: {
     encrypt: true,
   },
