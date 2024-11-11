@@ -36,12 +36,12 @@ export const getWard = async (req: Request, res: Response) => {
 						  + N')', 4152);
         SELECT top 1 NSGREF, address1, address2, shape, @Point.STDistance(shape.MakeValid()) as distance from symstreets WHERE shape.STIsValid() = 1 
         ORDER BY @Point.STDistance(shape.MakeValid()) asc`);
-    
-        console.log(result);
 
     const ward: Ward | undefined = result.recordset.map((row) => ({
       address1: row.address1,
-      address2: row.address2
+      address2: row.address2,
+      easting: easting,
+      northing: northing
     }))[0];
 
     if (ward) {
